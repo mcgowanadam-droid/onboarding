@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Love, Dad</title>
+<meta name="description" content="A private vault where dads keep their child's childhood and hand it over when they're grown.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Quiet neutrals: white page, soft grey surfaces, charcoal ink. Letters sit on pale grey paper; colour is kept for small type tags only. */
+  --night:#f7f7f6;
+  --night-2:#ffffff;
+  --night-3:#efefed;
+  --line:#e2e2df;
+  --text:#1d1d1c;
+  --muted:#6e6e6b;
+  --lamp:#1d1d1c;
+  --lamp-soft:rgba(29,29,28,.06);
+  --paper:#f1f1ef;
+  --paper-ink:#1d1d1c;
+  --paper-line:#dcdcd8;
+  --good:#4b7a5e;
+  --bad:#9a3b3b;
+  --seal:#3b3b39;
+  --display:"Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+  --body:"Literata", Georgia, "Times New Roman", serif;
+  --hand:"Caveat", "Segoe Print", cursive;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--night);color:var(--text);font-family:var(--body);font-size:17px;line-height:1.6}
+a{color:var(--lamp)}
+h1,h2,h3,h4{font-family:var(--display);line-height:1.1;margin:0;text-wrap:balance;font-weight:800;letter-spacing:-.01em}
+p{margin:0}
+button,input,textarea,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--lamp);outline-offset:2px}
+.btn{display:inline-flex;align-items:center;gap:.5em;border:0;border-radius:999px;padding:.7em 1.3em;background:var(--lamp);color:#fff;font-family:var(--display);font-weight:600;cursor:pointer;text-decoration:none;font-size:.95rem}
+.btn:hover{filter:brightness(1.06)}
+.btn[disabled]{opacity:.6;cursor:wait}
+.btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+.btn.ghost:hover{border-color:var(--lamp)}
+.btn.small{padding:.45em .9em;font-size:.85rem}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.hand{font-family:var(--hand);font-weight:600}
+.muted{color:var(--muted)}
+.eyebrow{font-family:var(--display);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+input[type=text],input[type=email],input[type=date],input[type=number],textarea,select{width:100%;background:var(--night);border:1px solid var(--line);border-radius:10px;padding:.65em .8em}
+textarea{min-height:110px;resize:vertical}
+label{display:block;font-family:var(--display);font-size:.85rem;color:var(--muted);margin-bottom:.3em}
+.field{display:grid;gap:.2em}
+.hidden{display:none !important}
+
+/* ---------- Landing ---------- */
+.topnav{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;max-width:1080px;margin:0 auto;gap:12px;flex-wrap:wrap}
+.wordmark{font-family:var(--hand);font-size:2rem;color:var(--text);text-decoration:none;line-height:1}
+.wordmark span{color:var(--muted)}
+.topnav nav{display:flex;gap:18px;align-items:center;flex-wrap:wrap;font-family:var(--display);font-size:.95rem}
+.topnav nav a{color:var(--muted);text-decoration:none}
+.topnav nav a:hover{color:var(--text)}
+.topnav nav a.btn{color:#fff}
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;padding:48px 20px 72px;max-width:1080px;margin:0 auto}
+.hero h1{font-size:clamp(2.6rem,6vw,4.6rem)}
+.hero h1 em{font-style:normal;color:var(--muted)}
+.hero p.lead{font-size:1.15rem;color:var(--muted);margin:22px 0 28px;max-width:34em}
+.hero .actions{display:flex;gap:12px;flex-wrap:wrap}
+.letter-card{background:var(--paper);color:var(--paper-ink);border-radius:6px;padding:30px 30px 26px;box-shadow:0 24px 50px -24px rgba(0,0,0,.22);transform:rotate(-2deg);position:relative;background-image:repeating-linear-gradient(transparent 0 31px,var(--paper-line) 31px 32px);background-position:0 70px}
+.letter-card .date{font-family:var(--display);font-size:.8rem;color:#777774;margin-bottom:14px}
+.letter-card p{font-size:1.02rem;line-height:32px}
+.letter-card .sign{font-family:var(--hand);font-size:1.9rem;margin-top:6px;line-height:1.2}
+.seal{width:58px;height:58px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#6a6a67,var(--seal) 60%,#222221);position:absolute;right:-16px;bottom:-16px;display:grid;place-items:center;font-family:var(--hand);color:#f1f1ef;font-size:1.3rem;box-shadow:0 6px 14px rgba(0,0,0,.2)}
+.weeks{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:36px 0}
+.weeks .wrap{display:grid;grid-template-columns:auto 1fr;gap:36px;align-items:center}
+.weeks .big{font-family:var(--display);font-weight:800;font-size:clamp(3.5rem,9vw,6.5rem);color:var(--lamp);line-height:1;font-variant-numeric:tabular-nums}
+.weeks p{font-size:1.15rem;max-width:36em}
+.dots{display:flex;flex-wrap:wrap;gap:3px;margin-top:14px;max-width:560px}
+.dots i{width:7px;height:7px;border-radius:2px;background:var(--line)}
+.dots i.on{background:var(--lamp)}
+section.block{padding:80px 0}
+section.block h2{font-size:clamp(1.9rem,4vw,2.8rem);margin-bottom:18px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:36px}
+.step{border:1px solid var(--line);border-radius:14px;padding:24px;background:var(--night-2)}
+.step .n{font-family:var(--display);font-weight:800;font-size:2.2rem;color:var(--lamp);line-height:1}
+.step h3{font-size:1.25rem;margin:12px 0 8px}
+.step p{color:var(--muted)}
+.inside{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:36px}
+.inside div{background:var(--night);padding:24px}
+.inside h3{font-size:1.15rem;margin-bottom:6px}
+.inside p{color:var(--muted);font-size:.95rem}
+.privacy{background:var(--night-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.privacy ul{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:14px}
+.privacy li{padding-left:28px;position:relative}
+.privacy li::before{content:"";position:absolute;left:0;top:.55em;width:12px;height:12px;border-radius:50%;background:var(--good)}
+.founder .letter-card{transform:rotate(1deg)}
+.prices{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:36px}
+.price{border:1px solid var(--line);border-radius:14px;padding:26px;display:grid;gap:10px;align-content:start}
+.price.feature{border-color:var(--lamp);background:var(--lamp-soft)}
+.price .amt{font-family:var(--display);font-weight:800;font-size:2.4rem;font-variant-numeric:tabular-nums}
+.price .amt small{font-size:1rem;color:var(--muted);font-weight:400}
+.faq details{border-bottom:1px solid var(--line);padding:18px 0}
+.faq summary{font-family:var(--display);font-weight:600;font-size:1.1rem;cursor:pointer}
+.faq details p{color:var(--muted);margin-top:10px;max-width:46em}
+.waitlist{text-align:left}
+.waitlist form{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px;max-width:520px}
+.waitlist input[type=email]{flex:1 1 240px}
+.consent{font-size:.85rem;color:var(--muted);margin-top:12px;max-width:520px}
+.thanks{margin-top:18px;color:var(--good);font-family:var(--display)}
+.formerror{margin-top:12px;color:var(--bad);font-family:var(--display);font-size:.95rem}
+.notice{max-width:46em}
+.notice h3{font-size:1.1rem;margin:22px 0 6px}
+.notice p,.notice li{color:var(--muted);font-size:.95rem}
+.notice ul{padding-left:1.2em;margin:6px 0 0}
+footer{padding:36px 0 60px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+footer a{color:var(--muted)}
+
+/* ---------- App ---------- */
+.app{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
+.side{background:var(--night);border-right:1px solid var(--line);padding:22px 16px;display:flex;flex-direction:column;gap:20px;position:sticky;top:0;height:100vh}
+.side .wordmark{font-size:1.8rem;padding:0 8px}
+.kidswitch{display:grid;gap:6px}
+.kid{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:10px;border:1px solid transparent;background:none;text-align:left;cursor:pointer;width:100%}
+.kid .av{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:800;background:var(--night-3);color:var(--text);flex:none}
+.kid small{display:block;color:var(--muted);font-size:.78rem;font-family:var(--display)}
+.kid.on{border-color:var(--line);background:var(--night-3)}
+.menu{display:grid;gap:2px}
+.menu a{display:flex;gap:10px;align-items:center;padding:9px 12px;border-radius:9px;color:var(--muted);text-decoration:none;font-family:var(--display);font-size:.95rem}
+.menu a:hover{color:var(--text);background:var(--night-3)}
+.menu a.on{color:#fff;background:var(--lamp)}
+.menu svg{width:18px;height:18px;flex:none}
+.side .foot{margin-top:auto;font-size:.8rem;color:var(--muted);font-family:var(--display)}
+.main{background:var(--night);padding:28px 32px 100px;max-width:980px;width:100%;min-width:0}
+.draftbar{font-family:var(--display);font-size:.8rem;color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:8px 12px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.draftbar select{width:auto;padding:.2em .5em;font-size:.8rem;border-radius:6px}
+.pagehead{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+.pagehead h1{font-size:2rem}
+.pagehead p{color:var(--muted);margin-top:6px}
+.card{background:var(--night-2);border:1px solid var(--line);border-radius:14px;padding:22px}
+.grid2{display:grid;grid-template-columns:1.4fr 1fr;gap:20px}
+.stack{display:grid;gap:20px;align-content:start}
+.prompt{background:var(--paper);color:var(--paper-ink);border:0}
+.prompt .eyebrow{color:var(--muted)}
+.prompt h2{font-size:1.6rem;margin:10px 0 16px;color:var(--paper-ink)}
+.prompt textarea{background:#fff;border-color:var(--paper-line);color:var(--paper-ink)}
+.starters{margin:12px 0 0;padding-left:1.3em;display:grid;gap:6px}
+.starters li{padding-left:.2em}
+.note{font-family:var(--display);font-size:.88rem;color:var(--muted);margin-top:12px}
+.tabs{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.tab{border:1px solid var(--paper-line);background:transparent;border-radius:999px;padding:.35em .9em;font-family:var(--display);font-size:.85rem;cursor:pointer;color:var(--paper-ink)}
+.tab.on{background:var(--paper-ink);color:var(--paper);border-color:var(--paper-ink)}
+.filebox{border:1px dashed var(--paper-line);border-radius:10px;padding:16px;font-family:var(--display);font-size:.9rem;color:#666663}
+.meter{height:8px;background:var(--night);border-radius:99px;overflow:hidden;margin:10px 0 6px}
+.meter b{display:block;height:100%;background:var(--lamp);border-radius:99px}
+.stat{font-family:var(--display);font-weight:800;font-size:2.4rem;line-height:1;font-variant-numeric:tabular-nums}
+.stat small{font-size:.95rem;font-weight:400;color:var(--muted)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.chip{border:1px solid var(--line);background:none;border-radius:999px;padding:.35em .9em;font-family:var(--display);font-size:.85rem;cursor:pointer;color:var(--muted)}
+.chip.on{border-color:var(--lamp);color:var(--lamp);background:var(--lamp-soft)}
+.agegroup{margin-bottom:30px}
+.agegroup h3{font-size:1.1rem;color:var(--lamp);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.agegroup h3::after{content:"";flex:1;height:1px;background:var(--line)}
+.entry{display:grid;grid-template-columns:110px 1fr;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+.entry:last-child{border-bottom:0}
+.entry .when{font-family:var(--display);font-size:.82rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.tag{display:inline-block;font-family:var(--display);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;padding:.15em .6em;border-radius:6px;background:var(--night-3);color:var(--muted);margin-bottom:6px}
+.tag.said{color:#7a5a2c}.tag.first{color:var(--good)}.tag.achievement{color:#5b4b86}.tag.voice{color:#2f5d78}.tag.photo{color:#8a4040}
+.entry h4{font-size:1.05rem;margin-bottom:4px;font-weight:600}
+.entry p{color:var(--text);opacity:.88}
+.entry .att{margin-top:8px}
+.entry .att img{max-width:240px;border-radius:8px;display:block}
+.entry .att audio,.entry .att video{max-width:100%}
+.letters{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px}
+.env{position:relative;background:var(--paper);color:var(--paper-ink);border-radius:8px;padding:22px 20px 26px;min-height:190px;display:flex;flex-direction:column;gap:8px;box-shadow:0 12px 26px -16px rgba(0,0,0,.25)}
+.env.draft{background:transparent;color:var(--text);border:1px dashed var(--line);box-shadow:none}
+.env h4{font-size:1.1rem;font-weight:600}
+.env .tag{align-self:flex-start}
+.env .when{font-family:var(--display);font-size:.85rem;color:#777774;padding-right:52px}
+.env.draft .when{color:var(--muted);padding-right:0}
+.env .seal{width:48px;height:48px;font-size:1.1rem;right:16px;bottom:16px}
+.env .actions{margin-top:auto;display:flex;gap:8px;flex-wrap:wrap}
+.years{display:grid;grid-template-columns:repeat(auto-fill,minmax(48px,1fr));gap:6px;margin-top:14px}
+.yr{border:1px solid var(--line);border-radius:8px;padding:6px 4px;text-align:center;font-family:var(--display);font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.yr.on{background:var(--lamp);border-color:var(--lamp);color:#fff}
+.yr.miss{border-style:dashed}
+.yr.now{border-color:var(--lamp);color:var(--text)}
+.upnext{list-style:none;padding:0;margin:12px 0 0;display:grid;gap:8px}
+.upnext li{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid var(--line);padding-bottom:8px;flex-wrap:wrap}
+.upnext li:last-child{border-bottom:0}
+.upnext span{font-family:var(--display);font-size:.85rem;color:var(--muted)}
+.topics{display:grid;gap:8px}
+.topic{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;text-align:left;border:1px solid var(--line);background:var(--night-2);border-radius:10px;padding:10px 12px;cursor:pointer}
+.topic:hover{border-color:var(--lamp)}
+.topic.on{border-color:var(--lamp);background:var(--lamp-soft)}
+.topic span{font-family:var(--display);font-size:.8rem;color:var(--muted);flex:none}
+.qtable{width:100%;border-collapse:collapse;font-size:.95rem}
+.qtable th,.qtable td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.qtable th{font-family:var(--display);font-weight:600;color:var(--muted);font-size:.85rem}
+.qtable td:first-child{color:var(--muted);width:42%}
+.tablewrap{overflow-x:auto}
+.people{display:grid;gap:10px}
+.person{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;flex-wrap:wrap}
+.person b{font-family:var(--display);font-weight:600}
+.pill{font-family:var(--display);font-size:.75rem;border-radius:999px;padding:.2em .7em;background:var(--night-3);color:var(--muted)}
+.pill.ok{color:var(--good)}
+.book{display:grid;grid-template-columns:150px 1fr;gap:20px;align-items:center}
+.cover{aspect-ratio:3/4;border-radius:4px 10px 10px 4px;background:linear-gradient(135deg,#f1f1ef,#e2e2df);border:1px solid var(--line);padding:16px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:inset 6px 0 0 rgba(0,0,0,.08)}
+.cover .hand{font-size:1.5rem;color:var(--text)}
+.cover small{font-family:var(--display);color:var(--muted);font-size:.75rem}
+.overlay{position:fixed;inset:0;background:rgba(20,20,20,.4);display:grid;place-items:center;padding:20px;z-index:50}
+.modal{background:var(--night-2);border:1px solid var(--line);border-radius:16px;padding:24px;width:min(560px,100%);max-height:90vh;overflow:auto;display:grid;gap:14px}
+.modal h3{font-size:1.4rem}
+.modal .tab{color:var(--text);border-color:var(--line)}
+.modal .tab.on{background:var(--lamp);color:#fff;border-color:var(--lamp)}
+.modal .starters{background:var(--paper);border-radius:10px;padding:12px 14px 12px 2.2em;margin:0}
+.row{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--text);color:#fff;font-family:var(--display);padding:10px 18px;border-radius:999px;z-index:60;box-shadow:0 10px 30px rgba(0,0,0,.18);max-width:calc(100vw - 32px);text-align:center}
+.bottomnav{display:none}
+@media (max-width:860px){
+  .hero,.two,.grid2{grid-template-columns:1fr}
+  .steps,.inside,.prices{grid-template-columns:1fr}
+  .weeks .wrap{grid-template-columns:1fr}
+  .app{grid-template-columns:minmax(0,1fr)}
+  .side{min-width:0}
+  .side{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:14px 16px;gap:12px}
+  .side .menu,.side .foot{display:none}
+  .kidswitch{grid-auto-flow:column;grid-auto-columns:max-content;overflow-x:auto}
+  .main{background:var(--night);padding:20px 16px 110px}
+  .bottomnav{display:flex;position:fixed;bottom:0;left:0;right:0;background:var(--night-2);border-top:1px solid var(--line);overflow-x:auto;z-index:40}
+  .bottomnav a{flex:1 0 auto;padding:10px 12px;text-align:center;font-family:var(--display);font-size:.75rem;color:var(--muted);text-decoration:none}
+  .bottomnav a.on{color:var(--lamp)}
+  .entry{grid-template-columns:1fr;gap:4px}
+  .book{grid-template-columns:110px 1fr}
+  .letter-card{transform:none}
+  .founder .letter-card{transform:none}
+  .seal{right:10px;bottom:-14px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .hero .letter-card{animation:settle .9s cubic-bezier(.2,.8,.2,1) both}
+  @keyframes settle{from{transform:rotate(-6deg) translateY(18px);opacity:.4}to{transform:rotate(-2deg);opacity:1}}
+}
+@media (prefers-reduced-motion:no-preference) and (max-width:860px){
+  @keyframes settle{from{transform:translateY(18px);opacity:.4}to{transform:none;opacity:1}}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= LANDING ================= -->
+<div id="landing">
+  <header class="topnav">
+    <a class="wordmark" href="#home">Love, <span>Dad</span></a>
+    <nav>
+      <a href="#how">How it works</a>
+      <a href="#inside">What's inside</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn small" href="#waitlist">Join the waitlist</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <p class="eyebrow">For dads who want to remember everything</p>
+      <h1>Give them their <em>childhood</em> back.</h1>
+      <p class="lead">They won't remember these years. Most of it, you'll forget too. Love, Dad gives you one question a week and one letter a month, keeps every answer safe, and hands the whole lot to your child when they're grown.</p>
+      <div class="actions">
+        <a class="btn" href="#waitlist">Join the waitlist</a>
+        <a class="btn ghost" href="#app-today">See an example</a>
+      </div>
+    </div>
+    <div class="letter-card" aria-label="Example letter">
+      <div class="date">Sealed 3 November 2026 · Opens on his 18th birthday</div>
+      <p>You won't remember this, but every night this week you've asked for "one more song." I always say no. Then I sing it anyway.</p>
+      <p>I wanted you to know that, son. You always got the extra song.</p>
+      <div class="sign">Love, Dad</div>
+      <div class="seal">LD</div>
+    </div>
+  </section>
+
+  <div class="weeks">
+    <div class="wrap">
+      <div class="big">936</div>
+      <div>
+        <p>That's how many weeks there are between the day they're born and their 18th birthday. Every square below is one of them. The bright ones have already gone.</p>
+        <div class="dots" id="landingDots" aria-label="Weeks from birth to 18, with a two-year-old's weeks highlighted"></div>
+        <p class="muted" style="font-size:.9rem;margin-top:10px">Shown for a two-year-old: 116 weeks gone, 820 left.</p>
+      </div>
+    </div>
+  </div>
+
+  <section class="block" id="how">
+    <div class="wrap">
+      <p class="eyebrow">How it works</p>
+      <h2>Two minutes a week. Eighteen years of them.</h2>
+      <div class="steps">
+        <div class="step"><div class="n">1</div><h3>Answer one question</h3><p>Every week you get one question, like "What made her laugh this week?" Write it, say it in a voice note, or record a quick video of yourself. Once a month it's a letter instead.</p></div>
+        <div class="step"><div class="n">2</div><h3>The vault fills up</h3><p>Your answers, their firsts, the daft things they say and the letters you write all land in their own vault, sorted by age.</p></div>
+        <div class="step"><div class="n">3</div><h3>Hand it over</h3><p>On their 18th, or a day you choose, they get the key to everything. Sealed letters open when they're old enough.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="inside" style="padding-top:0">
+    <div class="wrap">
+      <p class="eyebrow">What's inside</p>
+      <h2>Everything they'll wish they could remember</h2>
+      <div class="inside">
+        <div><h3>A letter every month</h3><p>In their birthday month, a birthday letter sealed until they're 18, so they open one from every year. The rest of the year, "open when" letters for the hard days: when they're scared, heartbroken, leaving home.</p></div>
+        <div><h3>Voice of Dad</h3><p>Your voice reading their bedtime story, telling them about your day. The thing they'll treasure most at 30.</p></div>
+        <div><h3>Things they said</h3><p>The words they get wrong and the questions that floor you. You think you'll remember. You won't.</p></div>
+        <div><h3>Firsts</h3><p>First word, first steps, first day at nursery, first goal. The dates and the details.</p></div>
+        <div><h3>The birthday interview</h3><p>The same ten questions every birthday. Watch the answers change from 3 to 18.</p></div>
+        <div><h3>Achievements</h3><p>Certificates, medals, swimming badges, school reports and drawings, kept long after the fridge door is full.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block privacy">
+    <div class="wrap two">
+      <div>
+        <p class="eyebrow">Privacy</p>
+        <h2>Private by design. Yours for good.</h2>
+        <p class="muted" style="margin-top:14px">This is a family keepsake, not a social network. Love, Dad isn't open yet. These are the promises we're building it to keep.</p>
+      </div>
+      <ul>
+        <li>No feed, no followers, no public sharing. Ever.</li>
+        <li>We're building it so your vault is locked with a key only your family holds. The aim is that not even we can read it.</li>
+        <li>Download everything, any time. It's yours.</li>
+        <li>Name someone you trust to look after the vault if anything happens to you.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block founder">
+    <div class="wrap two" style="align-items:center">
+      <div>
+        <p class="eyebrow">Why I'm building this</p>
+        <h2>The weeks were flying. I didn't want to lose any of them.</h2>
+        <p class="muted" style="margin-top:14px">Photo apps are built for sharing. I wanted something built for keeping: a place for the things I'd want him to know, in my own words, waiting for him when he's old enough to want them.</p>
+      </div>
+      <div class="letter-card">
+        <div class="date">From the founder</div>
+        <p>I'm a dad of one with another on the way, working a day job and building this in the evenings. This is how I'm making sure none of these years get lost.</p>
+        <div class="sign">Adam</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="pricing">
+    <div class="wrap">
+      <p class="eyebrow">Pricing</p>
+      <h2>Less than a coffee a month.</h2>
+      <div class="prices">
+        <div class="price"><h3>Monthly</h3><div class="amt">£4.99<small> / month</small></div><p class="muted">Every feature. Unlimited children. Cancel any time and keep a download of everything.</p></div>
+        <div class="price feature"><h3>Yearly</h3><div class="amt">£49<small> / year</small></div><p class="muted">Every feature, with two months free.</p></div>
+        <div class="price"><h3>Gift a year</h3><div class="amt">£49<small> once</small></div><p class="muted">For a new dad, from a partner or grandparent. Perfect for a baby shower or first Father's Day.</p></div>
+      </div>
+      <p class="muted" style="margin-top:16px;font-size:.9rem">Printed yearbooks available as an extra. Prices may change before launch. Joining the waitlist is free and you won't be asked to pay for anything.</p>
+    </div>
+  </section>
+
+  <section class="block faq" id="faq" style="padding-top:0">
+    <div class="wrap">
+      <p class="eyebrow">Questions</p>
+      <h2>Fair questions</h2>
+      <details><summary>Do I have to upload photos of my child?</summary><p>No. Letters, voice notes, videos of you, and written memories are the heart of it. Photos are there if you want them.</p></details>
+      <details><summary>Will this still exist when my child is 18?</summary><p>That's the plan, and you shouldn't have to take our word for it. You can download everything at any time, and the printed yearbooks are your backup on paper.</p></details>
+      <details><summary>What if I miss a month's letter?</summary><p>Nothing breaks. The next month brings the next letter, and you can go back and write a missed one whenever you like.</p></details>
+      <details><summary>Can my partner or the grandparents add things?</summary><p>Yes. Invite them to add memories or write letters. You decide what each person can do.</p></details>
+      <details><summary>What happens if something happens to me?</summary><p>You can name a trusted person to look after the vault and hand it over on the date you've set.</p></details>
+      <details><summary>Is it only for dads?</summary><p>It's written for dads, because almost nothing else is. Mums are welcome to use it too.</p></details>
+    </div>
+  </section>
+
+  <section class="block waitlist" id="waitlist" style="padding-top:0">
+    <div class="wrap">
+      <p class="eyebrow">Early access</p>
+      <h2>Start their vault before the next week's gone.</h2>
+      <p class="muted" style="margin-top:12px">Join the waitlist to hear first when Love, Dad opens.</p>
+      <!-- Works on Netlify with no extra setup (Netlify Forms). Elsewhere, set WAITLIST_ENDPOINT in the script below. -->
+      <form id="waitForm" name="waitlist" method="POST" data-netlify="true" netlify-honeypot="company">
+        <input type="hidden" name="form-name" value="waitlist">
+        <p class="hidden"><label>Leave this empty <input name="company" tabindex="-1" autocomplete="off"></label></p>
+        <label for="waitEmail" class="hidden">Email address</label>
+        <input id="waitEmail" name="email" type="email" placeholder="Your email address" autocomplete="email" required>
+        <button class="btn" type="submit" id="waitBtn">Join the waitlist</button>
+      </form>
+      <p class="consent">We'll only use your email to tell you about Love, Dad. One click to unsubscribe. <a href="#privacy-notice">How we look after it</a>.</p>
+      <p class="thanks hidden" id="waitThanks" role="status">You're on the list. Thank you. We'll be in touch when it opens.</p>
+      <p class="formerror hidden" id="waitError" role="alert"></p>
+    </div>
+  </section>
+
+  <section class="block" id="privacy-notice" style="padding-top:0">
+    <div class="wrap notice">
+      <p class="eyebrow">Privacy notice</p>
+      <h2 style="font-size:1.6rem">Your waitlist email</h2>
+      <h3>Who we are</h3>
+      <p>Love, Dad is run by Adam McGowan in Glasgow. Contact: <a href="mailto:hello@love-dad.com">hello@love-dad.com</a>.</p>
+      <h3>What we keep and why</h3>
+      <p>Only the email address you give us, so we can tell you when Love, Dad opens and ask what you think of it. We rely on your consent to do this.</p>
+      <h3>Who else sees it</h3>
+      <p>Nobody. We never sell or share it. It's stored with the service that runs this website's forms, and with the email service we use to write to you.</p>
+      <h3>How long we keep it</h3>
+      <p>Until you unsubscribe or ask us to delete it, or until we stop running the waitlist.</p>
+      <h3>Your rights</h3>
+      <ul>
+        <li>Ask to see, correct or delete your email at any time by emailing us.</li>
+        <li>Unsubscribe with one click from any email we send.</li>
+        <li>If you're unhappy with how we've handled it, you can complain to the Information Commissioner's Office at ico.org.uk.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer><div class="wrap">© 2026 Love, Dad · Made in Glasgow · <a href="#privacy-notice">Privacy notice</a></div></footer>
+</div>
+
+<!-- ================= APP ================= -->
+<div id="app" class="app hidden">
+  <aside class="side">
+    <a class="wordmark" href="#home">Love, <span>Dad</span></a>
+    <div class="kidswitch" id="kidSwitch"></div>
+    <nav class="menu" id="menu"></nav>
+    <div class="foot">Example only<br>Nothing here is sent to a server.</div>
+  </aside>
+  <main class="main" id="main"></main>
+  <nav class="bottomnav" id="bottomnav"></nav>
+</div>
+
+<div id="modalRoot"></div>
+
+<script>
+(function(){
+/* Waitlist: leave empty when the site is hosted on Netlify (it collects the form for you).
+   If you host it somewhere else, paste a form address here, e.g. "https://formspree.io/f/abcdwxyz". */
+const WAITLIST_ENDPOINT = "";
+
+const TODAY = new Date();
+const iso = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+const TODAY_S = iso(TODAY);
+const MONTH = TODAY_S.slice(0,7);
+const PAGES = [
+  ["app-today","Today",'<path d="M12 3v2M12 19v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M3 12h2M19 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/><circle cx="12" cy="12" r="4"/>'],
+  ["app-vault","Vault",'<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M12 9V7M15 12h2"/>'],
+  ["app-letters","Letters",'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>'],
+  ["app-yearly","Birthdays",'<path d="M4 21h16M5 21V12h14v9M12 12V8"/><path d="M12 5c-1 1-1 2 0 3 1-1 1-2 0-3z"/>'],
+  ["app-family","Family",'<circle cx="8" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M2 20c0-3.5 2.7-6 6-6s6 2.5 6 6M14 20c0-2.6 1.4-4.5 3-4.5s4 1.9 4 4.5"/>'],
+  ["app-handover","Handover",'<path d="M7 10V7a5 5 0 0 1 10 0v3"/><rect x="4" y="10" width="16" height="11" rx="2"/><circle cx="12" cy="15.5" r="1.5"/>'],
+  ["app-privacy","Privacy",'<path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/>']
+];
+const TYPES = {moment:"Moment",said:"Things they said",first:"First",achievement:"Achievement",voice:"Voice of Dad",photo:"Photo"};
+const MODES = [["write","Write it"],["voice","Voice note"],["video","Video of you"]];
+const PROMPTS = [
+  "What made {n} laugh this week?",
+  "What do you want {n} to know about the day they were born?",
+  "Describe a normal Saturday morning in your house right now.",
+  "What's a word {n} says wrong that you secretly hope they never fix?",
+  "What scared you most about becoming a dad, and how does it look now?",
+  "What did you and {n} do together this week that you want to remember?",
+  "What did {n} do this week that made you proud?",
+  "Tell {n} about your own dad, or whoever raised you.",
+  "What song is always on in the car right now?",
+  "What's one thing you hope {n} never loses?",
+  "What would you say to {n} on a day they feel like giving up?",
+  "Record a voice note telling {n} about your day today."
+];
+/* "Open when..." letters, in the order they're suggested. age = the earliest age the letter can be opened. */
+const OPEN_WHEN = [
+  {id:"scared",when:"you're scared",age:5,q:["What were you scared of when you were small?","What do you do now when you're frightened?","What do you want them to remember about being brave?"]},
+  {id:"down",when:"you're feeling down",age:8,q:["What always cheers you up, and what used to cheer them up?","What's a hard time you got through, and how?","What do you want them to know about asking for help?"]},
+  {id:"proud",when:"you're proud of yourself",age:6,q:["When did you last feel properly proud of yourself?","What have they already done that made you proud?","Why does it matter to stop and notice it?"]},
+  {id:"leftout",when:"you feel left out",age:8,q:["When did you feel like you didn't fit in?","Who turned out to be your real friends?","What makes them worth knowing, whatever anyone else thinks?"]},
+  {id:"terrible",when:"you've had a terrible day",age:8,q:["What was your worst day at their age?","What helps you get through a bad day now?","What would you want to say if you were sitting next to them?"]},
+  {id:"missme",when:"you miss me",age:8,q:["Where can they always find you, wherever you are?","What's a memory of the two of you you'll never lose?","What do you want them to hear in your voice?"]},
+  {id:"mistake",when:"you've made a big mistake",age:10,q:["What's the biggest mistake you've made, and what happened next?","What did it teach you?","What do you want them to know about how you'll feel about them, whatever they've done?"]},
+  {id:"friend",when:"you've fallen out with a friend",age:9,q:["Tell them about a friend you fell out with and made up with, or didn't.","What makes a friend worth keeping?","How do you say sorry when it's hard?"]},
+  {id:"lose",when:"you lose someone",age:10,q:["Who have you lost, and what do you still carry from them?","What helped you when you were grieving?","What do you want them to know about feeling sad for a long time?"]},
+  {id:"highschool",when:"you start high school",age:11,q:["What do you remember about your first day at high school?","What do you wish someone had told you then?","What should they not worry about at all?"]},
+  {id:"fight",when:"we've had a fight",age:12,q:["What do you want them to know about falling out with you?","What did you and your own dad fight about?","How do you want to make up after a row?"]},
+  {id:"decision",when:"you have a big decision to make",age:14,q:["What's the biggest decision you've ever made?","How do you decide when you're not sure?","What do you want them to trust about themselves?"]},
+  {id:"heart",when:"your heart gets broken",age:14,q:["Tell them about the first time your heart got broken.","What helped, and what didn't?","What do you want them to know about being loved?"]},
+  {id:"love",when:"you fall in love",age:16,q:["How did you know you were in love the first time?","What do you hope they look for in someone?","What do you want them to know about being kind, and being treated kindly?"]},
+  {id:"job",when:"you get your first job",age:16,q:["What was your first job, and what did you learn from it?","What makes someone good to work with?","What do you hope work gives them, beyond the money?"]},
+  {id:"driving",when:"you pass your driving test",age:17,q:["How many goes did your driving test take?","Where did you drive first when you passed?","What do you want them to promise you about driving?"]},
+  {id:"leavehome",when:"you leave home",age:17,q:["What was it like when you left home?","What will you miss most about them living with you?","What do you want them to know about coming back?"]},
+  {id:"parent",when:"you become a parent",age:18,q:["What was the day they were born like for you?","What surprised you most about being a dad?","What do you want them to know that nobody told you?"]}
+];
+const BIRTHDAY_Q = [
+  "What were they like this year, in a few words?",
+  "What did you do together this year that you never want to forget?",
+  "What do you hope for them in the year ahead?"
+];
+const INTERVIEW_Q = [
+  "What do you want to be when you grow up?",
+  "Who's your best friend?",
+  "What's your favourite food?",
+  "What makes you really happy?",
+  "What makes you sad?",
+  "What's your favourite thing to do with Dad?",
+  "What are you scared of?",
+  "What's the best thing about being your age?",
+  "If you had one wish, what would it be?",
+  "What do you love most about our family?"
+];
+const topicById = id => OPEN_WHEN.find(t=>t.id===id);
+const monthsAgo = n => { const d=new Date(TODAY.getFullYear(),TODAY.getMonth()-n,4); return iso(d).slice(0,7); };
+const ex = (n,day) => monthsAgo(n)+"-"+day;
+
+let state = {
+  active:"leo",
+  children:[
+    {id:"leo",name:"Leo",born:"2024-08-14"},
+    {id:"baby",name:"Baby no. 2",born:null,due:"2027-03-06"}
+  ],
+  entries:[
+    {id:1,c:"leo",type:"said",title:"Called the moon \"the big light\"",text:"Pointed out of the car window on the way back from Gran's and shouted BIG LIGHT. Wouldn't be told otherwise.",date:"2026-10-28"},
+    {id:2,c:"leo",type:"moment",title:"Bath-time football commentary",text:"You score a goal with the rubber duck every night and I have to do the commentary. If I stop, you shout \"MORE GOAL.\"",date:"2026-10-19"},
+    {id:3,c:"leo",type:"achievement",title:"Swimming badge: Duckling 1",text:"Kicked your legs the whole length holding the float. Wouldn't take the badge off at dinner.",date:"2026-09-20"},
+    {id:4,c:"leo",type:"voice",title:"Bedtime story, recorded",text:"Me reading your favourite book at bedtime. You fall asleep around page six. (Example entry: no audio in the example.)",date:"2026-08-30"},
+    {id:5,c:"leo",type:"moment",title:"Asleep on my chest during the football",text:"Fell asleep on me in the second half and didn't move for an hour. I missed the winner and didn't care.",date:"2025-11-03"},
+    {id:6,c:"leo",type:"first",title:"First word: \"ball\"",text:"Not mama, not dada. Ball. Your mum still hasn't forgiven either of us.",date:"2025-08-02"},
+    {id:7,c:"leo",type:"first",title:"First steps",text:"Eleven steps across the living room to the couch, then you fell into the cushions laughing.",date:"2025-07-11"},
+    {id:8,c:"baby",type:"moment",title:"The day we found out",text:"We told your big brother he was getting a baby. He said \"no thank you\" and went back to his trains.",date:"2026-07-20"}
+  ],
+  /* kind: "birthday" = that year's birthday letter (opens at 18); "when" = open-when letter (openAge = earliest age); "age" = extra letter that opens on a set birthday */
+  letters:[
+    {id:1,c:"leo",kind:"birthday",birthdayAge:1,openAge:18,title:"Your 1st birthday letter",monthly:true,month:"2025-08",q:BIRTHDAY_Q,mode:"write",text:"",sealed:true,sealedOn:"2025-08-14"},
+    {id:2,c:"leo",kind:"birthday",birthdayAge:2,openAge:18,title:"Your 2nd birthday letter",monthly:true,month:"2026-08",q:BIRTHDAY_Q,mode:"write",text:"",sealed:true,sealedOn:"2026-08-16"},
+    {id:3,c:"leo",kind:"when",topic:"scared",when:"you're scared",openAge:5,title:"Open when you're scared",monthly:true,month:monthsAgo(2),q:OPEN_WHEN[0].q,mode:"voice",text:"",sealed:true,sealedOn:ex(2,"03")},
+    {id:4,c:"baby",kind:"when",topic:"scared",when:"you're scared",openAge:5,title:"Open when you're scared",monthly:true,month:monthsAgo(2),q:OPEN_WHEN[0].q,mode:"write",text:"",sealed:true,sealedOn:ex(2,"04")},
+    {id:5,c:"leo",kind:"when",topic:"down",when:"you're feeling down",openAge:8,title:"Open when you're feeling down",monthly:true,month:monthsAgo(1),q:OPEN_WHEN[1].q,mode:"write",text:"",sealed:true,sealedOn:ex(1,"06")},
+    {id:6,c:"baby",kind:"when",topic:"down",when:"you're feeling down",openAge:8,title:"Open when you're feeling down",monthly:true,month:monthsAgo(1),q:OPEN_WHEN[1].q,mode:"write",text:"I'm writing this before you're even here. Your brother is asleep upstairs and your mum is...",sealed:false},
+    {id:7,c:"leo",kind:"age",openAge:10,title:"For your 10th birthday",mode:"write",text:"By the time you read this you'll be in P6 and probably too cool for me. I want to tell you about the year you were two...",sealed:false},
+    {id:8,c:"baby",kind:"age",openAge:16,title:"Before you were born",mode:"write",text:"",sealed:true,sealedOn:"2026-09-01"}
+  ],
+  topicSwap:{},
+  interview:{leo:{2:["\"Digger!\"","\"Nana\" (his gran)","Banana. Always banana.","Bath time and the swings","When the bath finishes","Football in the hall","The hoover","","\"More goal\"",""]}},
+  snapshot:{leo:{2:{food:"Banana, fish fingers",song:"The one about the bus",toy:"Red digger",show:"The one with the dogs",friend:"Nana",height:"89 cm"}}},
+  family:[
+    {name:"Mum",role:"Can add memories and write letters",status:"Joined"},
+    {name:"Gran",role:"Can write letters only",status:"Joined"},
+    {name:"Uncle",role:"Can write letters only",status:"Invite sent"}
+  ],
+  handover:{leo:{date:"2042-08-14",trusted:"",message:"Leo, this is everything I kept while you were too small to remember it. Take your time with it."}},
+  streak:12,
+  answeredThisWeek:false,
+  filter:"all",
+  answerMode:"write",
+  preview:"auto"
+};
+let nextId = 100;
+const STORE = "loveDadDraft2";
+
+/* ---------- helpers ---------- */
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmt = d => new Date(d+"T12:00:00").toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"});
+const fmtLong = d => new Date(d+"T12:00:00").toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"});
+const kid = () => state.children.find(k=>k.id===state.active) || state.children[0];
+const weeksBetween = (a,b) => Math.floor((b - a)/(7*864e5));
+function ord(n){ const s=["th","st","nd","rd"], v=n%100; return n+(s[(v-20)%10]||s[v]||s[0]); }
+function ageAt(born, dateStr){
+  if(!born) return null;
+  const b = new Date(born+"T12:00:00"), d = new Date(dateStr+"T12:00:00");
+  let a = d.getFullYear()-b.getFullYear();
+  if(d.getMonth()<b.getMonth() || (d.getMonth()===b.getMonth() && d.getDate()<b.getDate())) a--;
+  return a;
+}
+function ageLabel(k, dateStr){
+  if(!k.born) return "Before you were born";
+  const a = ageAt(k.born, dateStr);
+  if(a<0) return "Before you were born";
+  if(a===0) return "First year";
+  return "Age "+a;
+}
+function addYears(d,n){const x=new Date(d+"T12:00:00");x.setFullYear(x.getFullYear()+n);return iso(x);}
+function toast(msg){
+  const t=document.createElement("div");t.className="toast";t.setAttribute("role","status");t.textContent=msg;document.body.appendChild(t);
+  setTimeout(()=>t.remove(),2600);
+}
+const stripFiles = a => a && a.kind==="file" ? null : a;
+function save(){ try{ const s={...state}; s.entries=s.entries.map(e=>({...e,att:stripFiles(e.att)})); s.letters=s.letters.map(l=>({...l,att:stripFiles(l.att)})); localStorage.setItem(STORE,JSON.stringify(s)); }catch(e){} }
+function load(){ try{ const s=JSON.parse(localStorage.getItem(STORE)); if(s&&s.children){state=Object.assign(state,s);nextId=Math.max(100,...state.entries.map(e=>e.id),...state.letters.map(l=>l.id))+1;} }catch(e){} }
+
+/* ---------- letters of the month ---------- */
+function isBirthdayMonth(k){ return !!k.born && +k.born.slice(5,7)===TODAY.getMonth()+1; }
+/* The open-when topic for this month. The same topic for every child. */
+function monthTopic(){
+  if(state.topicSwap[MONTH] && topicById(state.topicSwap[MONTH])) return {...topicById(state.topicSwap[MONTH]), rewrite:isUsed(state.topicSwap[MONTH])};
+  const next = OPEN_WHEN.find(t=>!isUsed(t.id));
+  if(next) return {...next, rewrite:false};
+  // Every topic written: suggest rewriting the one written longest ago.
+  const last = id => state.letters.filter(l=>l.topic===id && l.month!==MONTH).map(l=>l.month).sort().pop()||"";
+  const oldest = [...OPEN_WHEN].sort((a,b)=>last(a.id).localeCompare(last(b.id)))[0];
+  return {...oldest, rewrite:true};
+}
+function isUsed(id){ return state.letters.some(l=>l.topic===id && l.monthly && l.month!==MONTH); }
+function thisMonthLetter(k){ return state.letters.find(l=>l.c===k.id && l.monthly && l.month===MONTH); }
+function monthlyTemplate(k){
+  const existing = thisMonthLetter(k);
+  if(existing) return templateFrom(existing);
+  if(isBirthdayMonth(k)){
+    const n = TODAY.getFullYear() - +k.born.slice(0,4);
+    if(n>=1) return {kind:"birthday",birthdayAge:n,openAge:Math.max(18,n),title:`Your ${ord(n)} birthday letter`,q:BIRTHDAY_Q,monthly:true,month:MONTH};
+  }
+  const t = monthTopic();
+  return {kind:"when",topic:t.id,when:t.when,openAge:t.age,title:`Open when ${t.when}`,q:t.q,monthly:true,month:MONTH,rewrite:t.rewrite};
+}
+function templateFrom(l){ return {kind:l.kind,birthdayAge:l.birthdayAge,topic:l.topic,when:l.when,openAge:l.openAge,title:l.title,q:l.q,monthly:true,month:l.month,rewrite:l.topic?isUsed(l.topic):false}; }
+/* Letter week: the birthday letter is due the week of their birthday; other letters in the first week of the month. */
+function letterWeek(k){
+  if(state.preview==="letter") return true;
+  if(state.preview==="question") return false;
+  const d = TODAY.getDate();
+  if(isBirthdayMonth(k) && TODAY.getFullYear() > +k.born.slice(0,4)){ const b=+k.born.slice(8,10); return d>=b && d<b+7; }
+  return d<=7;
+}
+function openText(l,k){
+  const name = esc(k.name);
+  if(l.kind==="birthday") return `Sealed until ${name}'s ${ord(l.openAge)} birthday${l.openAge===18?", so they open one letter from every year":""}.`;
+  if(l.kind==="when") return `${name} can open it when they need it, but not before they're ${l.openAge}.`;
+  return `Opens on ${name}'s ${ord(l.openAge)} birthday.`;
+}
+function letterWhen(l,k){
+  if(l.kind==="when"){
+    let s = `Open when ${esc(l.when)} · not before age ${l.openAge}`;
+    if(k.born) s += ` (${new Date(addYears(k.born,l.openAge)+"T12:00:00").toLocaleDateString("en-GB",{month:"long",year:"numeric"})})`;
+    return s;
+  }
+  const s = `Opens on their ${ord(l.openAge)} birthday`;
+  return k.born ? `${s} · ${fmtLong(addYears(k.born,l.openAge))}` : s;
+}
+
+/* ---------- landing ---------- */
+(function(){
+  const d=$("#landingDots"); let h="";
+  for(let i=0;i<936;i++) h+='<i'+(i<116?' class="on"':'')+'></i>';
+  d.innerHTML=h;
+})();
+$("#waitForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  const form=e.target, btn=$("#waitBtn"), err=$("#waitError");
+  err.classList.add("hidden");
+  if(location.protocol==="file:" && !WAITLIST_ENDPOINT){
+    err.textContent="This copy is opened from your computer, so emails can't be saved here. It will work once the site is online.";
+    err.classList.remove("hidden"); return;
+  }
+  btn.disabled=true; btn.textContent="Joining...";
+  try{
+    const r = await fetch(WAITLIST_ENDPOINT || "/", {method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded","Accept":"application/json"},body:new URLSearchParams(new FormData(form)).toString()});
+    if(!r.ok) throw new Error(r.status);
+    form.classList.add("hidden"); $("#waitThanks").classList.remove("hidden");
+  }catch(x){
+    err.textContent="Sorry, that didn't go through. Please try again in a minute.";
+    err.classList.remove("hidden");
+  }finally{ btn.disabled=false; btn.textContent="Join the waitlist"; }
+});
+
+/* ---------- app shell ---------- */
+function renderShell(page){
+  $("#kidSwitch").innerHTML = state.children.map(k=>{
+    const sub = k.born ? (ageAt(k.born, TODAY_S)+" years old") : ("Due "+fmt(k.due));
+    return `<button class="kid ${k.id===state.active?"on":""}" data-kid="${k.id}"><span class="av">${esc(k.name[0])}</span><span>${esc(k.name)}<small>${sub}</small></span></button>`;
+  }).join("") + `<button class="kid" data-addkid><span class="av">+</span><span>Add a child</span></button>`;
+  const link = ([id,label,icon]) => `<a href="#${id}" class="${id===page?"on":""}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${icon}</svg>${label}</a>`;
+  $("#menu").innerHTML = PAGES.map(link).join("");
+  $("#bottomnav").innerHTML = PAGES.map(([id,label])=>`<a href="#${id}" class="${id===page?"on":""}">${label}</a>`).join("");
+}
+document.addEventListener("click",e=>{
+  const k=e.target.closest("[data-kid]");
+  if(k){state.active=k.dataset.kid;state.filter="all";save();route();return;}
+  if(e.target.closest("[data-addkid]")) openAddChild();
+});
+
+/* ---------- pages ---------- */
+function weekInfo(k){
+  if(!k.born){
+    const w = Math.max(0,weeksBetween(TODAY,new Date(k.due+"T12:00:00")));
+    return {done:0,left:936,text:`Due in ${w} weeks. Their 936 haven't started yet, so start now.`};
+  }
+  const done = Math.min(936,Math.max(0,weeksBetween(new Date(k.born+"T12:00:00"),TODAY)));
+  return {done,left:936-done,text:`Week ${done} of 936`};
+}
+function weeklyPrompt(k){
+  const weekNo = Math.floor((TODAY - new Date(TODAY.getFullYear(),0,1))/(7*864e5));
+  const i = state.children.findIndex(c=>c.id===k.id);
+  return PROMPTS[(weekNo + Math.max(0,i)) % PROMPTS.length].replaceAll("{n}",k.name);
+}
+function questionCard(k){
+  const prompt = weeklyPrompt(k);
+  return `<div class="card prompt">
+    <p class="eyebrow">This week's question</p>
+    <h2>${esc(prompt)}</h2>
+    ${state.answeredThisWeek ? `<p style="font-family:var(--display)">Saved to ${esc(k.name)}'s vault. See you next week.</p>` : `
+    <div class="tabs">${MODES.map(([m,l])=>`<button class="tab ${state.answerMode===m?"on":""}" data-mode="${m}">${l}</button>`).join("")}</div>
+    ${state.answerMode==="write" ? `<label for="ans" class="hidden">Your answer</label><textarea id="ans" placeholder="Write as if you're talking to them, years from now..."></textarea>`
+    : `<div class="filebox"><label for="ansFile" style="color:inherit">${state.answerMode==="voice"?"Choose a voice note from your phone":"Choose a short video of yourself"}</label><input id="ansFile" type="file" accept="${state.answerMode==="voice"?"audio/*":"video/*"}"><p style="margin-top:8px;font-size:.8rem">In the full app you'll record straight from here.</p></div>`}
+    <div class="row" style="margin-top:12px;justify-content:space-between;align-items:center"><span style="font-size:.85rem;font-family:var(--display);color:#777774">Takes about two minutes</span><button class="btn" data-answer>Save to vault</button></div>`}
+  </div>`;
+}
+function letterCard(k){
+  const l = thisMonthLetter(k);
+  if(l && l.sealed) return `<div class="card prompt">
+    <p class="eyebrow">This month's letter</p>
+    <h2>${esc(l.title)}</h2>
+    <p>Sealed on ${fmt(l.sealedOn)}. ${openText(l,k)}</p>
+    <p class="note">The weekly question is back next week.</p>
+  </div>`;
+  const t = monthlyTemplate(k);
+  const others = state.children.filter(c=>c.id!==k.id).map(c=>c.name);
+  return `<div class="card prompt">
+    <p class="eyebrow">Letter of the month · instead of this week's question</p>
+    <h2>${esc(t.title)}</h2>
+    <p>${openText(t,k)}</p>
+    <p class="eyebrow" style="margin-top:16px">Three questions to get you started</p>
+    <ol class="starters">${t.q.map(q=>`<li>${esc(q)}</li>`).join("")}</ol>
+    ${t.rewrite ? `<p class="note">You've written this one before. Write it again: you're a different dad now.</p>` : ""}
+    ${t.kind==="when" && others.length ? `<p class="note">Same topic for ${esc(others.join(" and "))} this month.</p>` : ""}
+    <div class="row" style="margin-top:16px;justify-content:space-between;align-items:center">
+      <span style="font-size:.85rem;font-family:var(--display);color:#777774">About 15 to 20 minutes. Write, voice note or video.</span>
+      <span style="display:flex;gap:8px;flex-wrap:wrap">${t.kind==="when" && !l ? `<button class="btn ghost small" data-swap>Swap topic</button>` : ""}<button class="btn" data-monthly>${l?"Keep writing":"Start the letter"}</button></span>
+    </div>
+  </div>`;
+}
+function pageToday(){
+  const k=kid(); const wi=weekInfo(k);
+  const yearAgo = new Date(TODAY); yearAgo.setFullYear(yearAgo.getFullYear()-1);
+  const otd = state.entries.filter(e=>e.c===k.id && Math.abs(new Date(e.date+"T12:00:00")-yearAgo)<10*864e5);
+  const recent = state.entries.filter(e=>e.c===k.id).sort((a,b)=>b.date.localeCompare(a.date)).slice(0,3);
+  return `
+  <div class="pagehead"><div><h1>Evening, Dad.</h1><p>${esc(k.name)} · ${wi.text}</p></div><button class="btn ghost small" data-add>Add something</button></div>
+  <div class="grid2">
+    <div class="stack">
+      ${letterWeek(k) ? letterCard(k) : questionCard(k)}
+      <div class="card">
+        <h3 style="font-size:1.1rem;margin-bottom:12px">Recently kept</h3>
+        ${recent.length?recent.map(entryHTML).join(""):`<p class="muted">Nothing yet. This week's question is a good place to start.</p>`}
+      </div>
+    </div>
+    <div class="stack">
+      <div class="card">
+        <p class="eyebrow">936 weeks</p>
+        <div class="stat" style="margin-top:8px">${wi.left}<small> weeks until ${esc(k.name)} is 18</small></div>
+        <div class="meter"><b style="width:${(wi.done/936*100).toFixed(1)}%"></b></div>
+        <p class="muted" style="font-size:.85rem">${wi.done} gone. Every one you answer is one they get back.</p>
+      </div>
+      <div class="card">
+        <p class="eyebrow">Your streak</p>
+        <div class="stat" style="margin-top:8px">${state.streak}<small> weeks in a row</small></div>
+        <p class="muted" style="font-size:.85rem;margin-top:6px">Miss a week? It happens. Just answer the next one.</p>
+      </div>
+      <div class="card">
+        <p class="eyebrow">On this day, a year ago</p>
+        ${otd.length?otd.map(e=>`<h4 style="font-size:1.05rem;margin:10px 0 4px">${esc(e.title)}</h4><p class="muted">${esc(e.text)}</p>`).join(""):`<p class="muted" style="margin-top:8px">Nothing from this week last year. Next year, this week's answer will show up here.</p>`}
+      </div>
+    </div>
+  </div>`;
+}
+function attHTML(a){
+  if(!a) return "";
+  if(a.mime && a.mime.startsWith("image")) return `<div class="att"><img src="${a.url}" alt="${esc(a.name)}"></div>`;
+  if(a.mime && a.mime.startsWith("audio")) return `<div class="att"><audio controls src="${a.url}"></audio></div>`;
+  if(a.mime && a.mime.startsWith("video")) return `<div class="att"><video controls src="${a.url}" style="max-width:320px"></video></div>`;
+  return `<div class="att muted">Attached: ${esc(a.name)}</div>`;
+}
+function entryHTML(e){
+  return `<div class="entry"><div class="when">${fmt(e.date)}</div><div><span class="tag ${e.type}">${TYPES[e.type]}</span><h4>${esc(e.title)}</h4><p>${esc(e.text)}</p>${attHTML(e.att)}</div></div>`;
+}
+function pageVault(){
+  const k=kid();
+  let list = state.entries.filter(e=>e.c===k.id && (state.filter==="all"||e.type===state.filter)).sort((a,b)=>b.date.localeCompare(a.date));
+  const groups={}; list.forEach(e=>{const g=ageLabel(k,e.date);(groups[g]=groups[g]||[]).push(e);});
+  const total = state.entries.filter(e=>e.c===k.id).length;
+  return `
+  <div class="pagehead"><div><h1>${esc(k.name)}'s vault</h1><p>${total} things kept so far, sorted by age.</p></div><button class="btn" data-add>Add something</button></div>
+  <div class="chips">${[["all","Everything"],...Object.entries(TYPES)].map(([t,l])=>`<button class="chip ${state.filter===t?"on":""}" data-filter="${t}">${l}</button>`).join("")}</div>
+  ${Object.keys(groups).length? Object.entries(groups).map(([g,es])=>`<div class="agegroup"><h3>${g}</h3>${es.map(entryHTML).join("")}</div>`).join("") : `<div class="card"><p class="muted">Nothing here yet. Add the first one.</p></div>`}`;
+}
+const MODE_LABEL = {write:"Written",voice:"Voice note",video:"Video"};
+function envHTML(l,k){
+  if(l.sealed) return `<div class="env"><span class="tag" style="background:#e4e4e1;color:#5a5a57">Sealed ${fmt(l.sealedOn)}</span><h4>${esc(l.title)}</h4><p class="when">${letterWhen(l,k)}</p><p class="when">${MODE_LABEL[l.mode||"write"]}</p><div class="seal">LD</div></div>`;
+  const preview = l.mode==="write" || !l.mode ? `<p style="font-size:.9rem;opacity:.8">${esc((l.text||"").slice(0,110))}${(l.text||"").length>110?"…":""}</p>` : `<p style="font-size:.9rem;opacity:.8">${MODE_LABEL[l.mode]}${l.att?": "+esc(l.att.name):""}</p>`;
+  return `<div class="env draft"><span class="tag">Draft</span><h4>${esc(l.title)}</h4><p class="when">${letterWhen(l,k)}</p>${preview}<div class="actions"><button class="btn small" data-editletter="${l.id}">Keep writing</button></div></div>`;
+}
+function pageLetters(){
+  const k=kid(); const ls=state.letters.filter(l=>l.c===k.id);
+  const t = monthlyTemplate(k); const cur = thisMonthLetter(k);
+  let years = "";
+  if(k.born){
+    const age = ageAt(k.born,TODAY_S);
+    years = `<div class="card" style="margin-bottom:20px">
+      <p class="eyebrow">Birthday letters</p>
+      <p class="muted" style="margin-top:6px;font-size:.92rem">One in every birthday month, all sealed until ${esc(k.name)}'s 18th. Then they open one from every year.</p>
+      <div class="years">${Array.from({length:18},(_,i)=>{
+        const n=i+1, has=state.letters.some(l=>l.c===k.id&&l.kind==="birthday"&&l.birthdayAge===n&&l.sealed);
+        const cls = has?"on":(n<=age?"miss":(n===age+1?"now":""));
+        return `<div class="yr ${cls}" title="${has?"Sealed":n<=age?"Not written":"Still to come"}">${n}</div>`;
+      }).join("")}</div>
+    </div>`;
+  }
+  const upcoming = OPEN_WHEN.filter(x=>!isUsed(x.id) && x.id!==(t.topic||"")).slice(0,4);
+  return `
+  <div class="pagehead"><div><h1>Letters for later</h1><p>One letter a month. Sealed letters stay locked until they can be opened. Not even you can read them again.</p></div><button class="btn ghost" data-newletter>Write an extra letter</button></div>
+  <div class="card prompt" style="margin-bottom:20px">
+    <p class="eyebrow">This month's letter</p>
+    <h2 style="margin-bottom:8px">${esc(t.title)}</h2>
+    <p>${cur&&cur.sealed?`Sealed on ${fmt(cur.sealedOn)}. Next month's letter arrives in the first week of the month.`:openText(t,k)}</p>
+    ${cur&&cur.sealed?"":`<div class="row" style="margin-top:14px;justify-content:flex-start">${t.kind==="when"&&!cur?`<button class="btn ghost small" data-swap>Swap topic</button>`:""}<button class="btn small" data-monthly>${cur?"Keep writing":"Start the letter"}</button></div>`}
+  </div>
+  ${years}
+  <div class="letters">${ls.length?ls.slice().sort((a,b)=>(a.sealed-b.sealed)||String(b.sealedOn||"").localeCompare(String(a.sealedOn||""))).map(l=>envHTML(l,k)).join(""):`<p class="muted">No letters yet.</p>`}</div>
+  <div class="card" style="margin-top:24px">
+    <h3 style="font-size:1.1rem">Coming up</h3>
+    ${upcoming.length?`<ul class="upnext">${upcoming.map(x=>`<li>Open when ${esc(x.when)}<span>from age ${x.age}</span></li>`).join("")}</ul>`
+      :`<p class="muted" style="margin-top:8px">You've written every letter on the list. From now on you'll be asked to write earlier ones again: you're a different dad now.</p>`}
+  </div>`;
+}
+function pageYearly(){
+  const k=kid();
+  if(!k.born) return `<div class="pagehead"><div><h1>Birthdays</h1><p>The birthday interview starts on ${esc(k.name)}'s first birthday.</p></div></div><div class="card"><p class="muted">Once they're here, every birthday you'll ask the same ten questions and save a snapshot of who they are at that age.</p></div>`;
+  const age = ageAt(k.born, TODAY_S);
+  const iv = (state.interview[k.id]||{}); const years = Object.keys(iv).map(Number).sort((a,b)=>a-b);
+  const snap = ((state.snapshot[k.id]||{})[age])||{};
+  const fields=[["food","Favourite food"],["song","Favourite song"],["toy","Favourite toy"],["show","Favourite TV show"],["friend","Best friend"],["height","Height"]];
+  return `
+  <div class="pagehead"><div><h1>Birthdays</h1><p>The same ten questions every birthday. At 18, they'll see how they changed.</p></div><button class="btn" data-interview>${iv[age]?"Edit":"Start"} age ${age} interview</button></div>
+  <div class="card" style="margin-bottom:20px">
+    <p class="eyebrow">The birthday interview</p>
+    <p class="muted" style="margin:6px 0 14px;font-size:.9rem">Too young to answer? Write what you think they'd say. From about 3, record their voice answering so they can hear themselves at that age.</p>
+    <div class="tablewrap"><table class="qtable"><thead><tr><th>Question</th>${years.map(y=>`<th>Age ${y}</th>`).join("")}${years.includes(18)?"":`<th>Age 18</th>`}</tr></thead>
+    <tbody>${INTERVIEW_Q.map((q,i)=>`<tr><td>${q}</td>${years.map(y=>`<td>${esc(iv[y][i]||"—")}</td>`).join("")}${years.includes(18)?"":`<td class="muted">Sealed until then</td>`}</tr>`).join("")}</tbody></table></div>
+  </div>
+  <div class="card">
+    <p class="eyebrow">At age ${age}</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-top:12px">
+      ${fields.map(([f,l])=>`<div class="field"><label for="snap-${f}">${l}</label><input type="text" id="snap-${f}" data-snap="${f}" value="${esc(snap[f]||"")}"></div>`).join("")}
+    </div>
+    <div class="row" style="margin-top:14px"><button class="btn small" data-savesnap>Save snapshot</button></div>
+  </div>`;
+}
+function pageFamily(){
+  const k=kid();
+  return `
+  <div class="pagehead"><div><h1>Family</h1><p>Invite the people who love ${esc(k.name)} to add to the vault. You decide what each person can do.</p></div></div>
+  <div class="grid2">
+    <div class="card"><div class="people">${state.family.map(p=>`<div class="person"><div><b>${esc(p.name)}</b><div class="muted" style="font-size:.88rem">${esc(p.role)}</div></div><span class="pill ${p.status==="Joined"?"ok":""}">${esc(p.status)}</span></div>`).join("")}</div></div>
+    <form class="card stack" id="inviteForm" style="gap:12px">
+      <h3 style="font-size:1.15rem">Invite someone</h3>
+      <div class="field"><label for="invName">Who are they?</label><input type="text" id="invName" placeholder="e.g. Grandad" required></div>
+      <div class="field"><label for="invEmail">Their email</label><input type="email" id="invEmail" placeholder="name@example.com" required></div>
+      <div class="field"><label for="invRole">What can they do?</label><select id="invRole"><option>Can write letters only</option><option>Can add memories and write letters</option><option>Can view the vault only</option></select></div>
+      <button class="btn" type="submit">Send invite</button>
+      <p class="muted" style="font-size:.8rem">Example only: no email is actually sent.</p>
+    </form>
+  </div>`;
+}
+function pageHandover(){
+  const k=kid(); const h=state.handover[k.id]||(state.handover[k.id]={date:k.born?addYears(k.born,18):"",trusted:"",message:""});
+  const count = state.entries.filter(e=>e.c===k.id).length;
+  const sealed = state.letters.filter(l=>l.c===k.id&&l.sealed).length;
+  const daysLeft = h.date? Math.max(0,Math.ceil((new Date(h.date+"T12:00:00")-TODAY)/864e5)) : null;
+  return `
+  <div class="pagehead"><div><h1>The handover</h1><p>The day ${esc(k.name)} gets the key to everything you kept.</p></div></div>
+  <div class="grid2">
+    <div class="stack">
+      <div class="card stack" style="gap:12px">
+        <div class="field"><label for="hoDate">Handover date</label><input type="date" id="hoDate" value="${esc(h.date)}"></div>
+        <p class="muted" style="font-size:.88rem">${daysLeft!==null?`${daysLeft.toLocaleString("en-GB")} days to go. Defaults to their 18th birthday; change it to any day that feels right.`:"Set a date once they're born."}</p>
+        <div class="field"><label for="hoMsg">Your handover message</label><textarea id="hoMsg">${esc(h.message)}</textarea></div>
+        <div class="row"><button class="btn small" data-savehandover>Save</button></div>
+      </div>
+      <div class="card stack" style="gap:12px">
+        <h3 style="font-size:1.15rem">If anything happens to me</h3>
+        <p class="muted" style="font-size:.92rem">Name someone you trust to look after ${esc(k.name)}'s vault and make sure the handover happens. They can't read sealed letters.</p>
+        <div class="field"><label for="hoTrusted">Trusted person's name and email</label><input type="text" id="hoTrusted" value="${esc(h.trusted)}" placeholder="e.g. my brother, name@example.com"></div>
+        <div class="row"><button class="btn small" data-savehandover>Save</button></div>
+      </div>
+    </div>
+    <div class="stack">
+      <div class="card">
+        <p class="eyebrow">Waiting for ${esc(k.name)}</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
+          <div><div class="stat">${count}</div><span class="muted" style="font-size:.85rem">things kept</span></div>
+          <div><div class="stat">${sealed}</div><span class="muted" style="font-size:.85rem">sealed letters</span></div>
+        </div>
+      </div>
+      <div class="card book">
+        <div class="cover"><span class="hand">Love, Dad</span><div><b style="font-family:var(--display)">${esc(k.name)}</b><br><small>${k.born?"Age "+ageAt(k.born,TODAY_S)+" · "+TODAY.getFullYear():"Year one"}</small></div></div>
+        <div><h3 style="font-size:1.15rem">This year's printed book</h3><p class="muted" style="font-size:.9rem;margin:6px 0 12px">Everything from this year, printed and bound. A copy on paper, just in case.</p><button class="btn small" data-book>Preview the book</button><p class="muted" style="font-size:.78rem;margin-top:8px">Example price £29. Not available yet.</p></div>
+      </div>
+    </div>
+  </div>`;
+}
+function pagePrivacy(){
+  return `
+  <div class="pagehead"><div><h1>Privacy and your data</h1><p>It's your family's. Here's how it will be looked after.</p></div></div>
+  <div class="grid2">
+    <div class="card stack" style="gap:14px">
+      <h3 style="font-size:1.15rem">What we're building it to do</h3>
+      <p>No feed, no followers, no public sharing.</p>
+      <p>Locked with a key only your family holds, so we can't read it either.</p>
+      <p>Never sell or share your data, and never use it to train AI.</p>
+      <p>Ask for everything to be deleted and it's gone within a month.</p>
+      <p class="muted" style="font-size:.85rem">These describe the full version, which isn't built yet. This example keeps everything in your own browser only.</p>
+    </div>
+    <div class="stack">
+      <div class="card stack" style="gap:10px">
+        <h3 style="font-size:1.15rem">Take a copy of everything</h3>
+        <p class="muted" style="font-size:.92rem">In the full version this downloads a file. In this example, it copies all entries and letter titles as text.</p>
+        <div><button class="btn small" data-export>Copy everything</button></div>
+      </div>
+      <div class="card stack" style="gap:10px">
+        <h3 style="font-size:1.15rem">Reset this example</h3>
+        <p class="muted" style="font-size:.92rem">Clears anything you've added and brings back the example data.</p>
+        <div><button class="btn ghost small" data-reset>Reset example</button></div>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ---------- modals ---------- */
+let letterCtx = null;
+function modal(html){ $("#modalRoot").innerHTML=`<div class="overlay" data-close><div class="modal" role="dialog" aria-modal="true">${html}</div></div>`; const f=$("#modalRoot input:not([type=hidden]), #modalRoot textarea, #modalRoot select"); if(f) f.focus(); }
+function closeModal(){ $("#modalRoot").innerHTML=""; letterCtx=null; }
+function openAdd(){
+  const k=kid();
+  modal(`<h3>Add to ${esc(k.name)}'s vault</h3>
+  <div class="field"><label for="mType">What is it?</label><select id="mType">${Object.entries(TYPES).map(([t,l])=>`<option value="${t}">${l}</option>`).join("")}</select></div>
+  <div class="field"><label for="mTitle">Title</label><input type="text" id="mTitle" placeholder="e.g. First day at nursery"></div>
+  <div class="field"><label for="mDate">When</label><input type="date" id="mDate" value="${TODAY_S}"></div>
+  <div class="field"><label for="mText">Tell them about it</label><textarea id="mText"></textarea></div>
+  <div class="field"><label for="mFile">Attach a voice note, video or photo (optional)</label><input type="file" id="mFile" accept="image/*,audio/*,video/*"></div>
+  <div class="row"><button class="btn ghost" data-cancel>Cancel</button><button class="btn" data-saveentry>Save</button></div>`);
+}
+/* opts: {id} to edit a letter, {monthly:true} for this month's letter, {} for an extra letter */
+function openLetter(opts={}){
+  const k=kid();
+  let l = opts.id ? state.letters.find(x=>x.id===opts.id) : null;
+  if(opts.monthly) l = thisMonthLetter(k) || null;
+  const tpl = opts.monthly ? monthlyTemplate(k) : (l && l.monthly ? templateFrom(l) : null);
+  const mode = (l && l.mode) || "write";
+  letterCtx = {id:l?l.id:null, tpl, mode};
+  const head = tpl
+    ? `<h3>${esc(tpl.title)}</h3><p class="muted" style="font-size:.92rem">${openText(tpl,k)}</p>
+       <ol class="starters">${tpl.q.map(q=>`<li>${esc(q)}</li>`).join("")}</ol>`
+    : `<h3>${l?"Keep writing":"Write an extra letter to "+esc(k.name)}</h3>
+       <div class="field"><label for="lKind">When should it open?</label><select id="lKind"><option value="age" ${!l||l.kind==="age"?"selected":""}>On a birthday</option><option value="when" ${l&&l.kind==="when"?"selected":""}>"Open when..."</option></select></div>
+       <div class="field" id="lAgeWrap"><label for="lAge">Which birthday?</label><input type="number" id="lAge" min="1" max="60" value="${l&&l.kind==="age"?l.openAge:18}"></div>
+       <div id="lWhenWrap" class="hidden" style="display:grid;gap:14px">
+         <div class="field"><label for="lWhen">Open when...</label><input type="text" id="lWhen" value="${l&&l.when?esc(l.when):""}" placeholder="e.g. you leave home"></div>
+         <div class="field"><label for="lMin">Not before what age?</label><input type="number" id="lMin" min="1" max="60" value="${l&&l.kind==="when"?l.openAge:12}"></div>
+       </div>`;
+  modal(`${head}
+  <div class="tabs" style="margin:0">${MODES.map(([m,lab])=>`<button type="button" class="tab ${mode===m?"on":""}" data-lmode="${m}">${lab}</button>`).join("")}</div>
+  <div class="field ${mode==="write"?"":"hidden"}" id="lWriteWrap"><label for="lText">Your letter</label><textarea id="lText" style="min-height:220px;background:var(--paper);color:var(--paper-ink)">${l?esc(l.text):""}</textarea></div>
+  <div class="field ${mode==="write"?"hidden":""}" id="lFileWrap"><label for="lFile" id="lFileLabel">${mode==="video"?"Choose a video of yourself":"Choose a voice note"}</label><input type="file" id="lFile" accept="${mode==="video"?"video/*":"audio/*"}">${l&&l.att?`<p class="muted" style="font-size:.85rem">Already attached: ${esc(l.att.name)}</p>`:""}<p class="muted" style="font-size:.8rem">In the full app you'll record straight from here.</p></div>
+  <p class="muted" style="font-size:.85rem">Once sealed, it can't be read or changed until it opens.</p>
+  <div class="row"><button class="btn ghost" data-cancel>Cancel</button><button class="btn ghost" data-saveletter data-seal="0">Save draft</button><button class="btn" data-saveletter data-seal="1">Seal it</button></div>`);
+  if(!tpl){
+    const sync=()=>{const w=$("#lKind").value==="when";$("#lAgeWrap").classList.toggle("hidden",w);$("#lWhenWrap").classList.toggle("hidden",!w);};
+    $("#lKind").addEventListener("change",sync); sync();
+  }
+}
+function openSwap(){
+  const k=kid(); const cur=monthTopic();
+  const fresh = OPEN_WHEN.filter(t=>!isUsed(t.id));
+  const list = fresh.length ? fresh : OPEN_WHEN;
+  const names = state.children.map(c=>c.name);
+  modal(`<h3>Swap this month's letter</h3>
+  <p class="muted" style="font-size:.92rem">${fresh.length?"Pick another topic.":"You've written them all, so pick one to write again."}${names.length>1?` It changes the topic for ${esc(names.join(" and "))}.`:""}</p>
+  <div class="topics">${list.map(t=>`<button class="topic ${t.id===cur.id?"on":""}" data-picktopic="${t.id}">Open when ${esc(t.when)}<span>from age ${t.age}</span></button>`).join("")}</div>
+  <div class="row"><button class="btn ghost" data-cancel>Cancel</button></div>`);
+}
+function openInterview(){
+  const k=kid(); const age=ageAt(k.born,TODAY_S);
+  const iv=(state.interview[k.id]||{})[age]||[];
+  modal(`<h3>${esc(k.name)}'s age ${age} interview</h3>
+  ${INTERVIEW_Q.map((q,i)=>`<div class="field"><label for="iq${i}">${q}</label><input type="text" id="iq${i}" value="${esc(iv[i]||"")}"></div>`).join("")}
+  <div class="row"><button class="btn ghost" data-cancel>Cancel</button><button class="btn" data-saveinterview>Save answers</button></div>`);
+}
+function openAddChild(){
+  modal(`<h3>Add a child</h3>
+  <div class="field"><label for="cName">Their name (first name is plenty)</label><input type="text" id="cName"></div>
+  <div class="field"><label for="cBorn">Date of birth, or due date if they're not here yet</label><input type="date" id="cBorn"></div>
+  <div class="field"><label for="cDue"><input type="checkbox" id="cDue" style="width:auto"> Not born yet</label></div>
+  <div class="row"><button class="btn ghost" data-cancel>Cancel</button><button class="btn" data-savechild>Add</button></div>`);
+}
+function openBook(){
+  const k=kid(); const es=state.entries.filter(e=>e.c===k.id).sort((a,b)=>a.date.localeCompare(b.date));
+  modal(`<h3>${esc(k.name)}'s book (preview)</h3>
+  <div style="background:var(--paper);color:var(--paper-ink);border-radius:8px;padding:24px;display:grid;gap:16px">
+    <div class="hand" style="font-size:2rem">Love, Dad</div>
+    ${es.map(e=>`<div><div style="font-family:var(--display);font-size:.8rem;color:#777774">${fmt(e.date)} · ${TYPES[e.type]}</div><b style="font-family:var(--display)">${esc(e.title)}</b><p style="margin-top:4px">${esc(e.text)}</p></div>`).join("")}
+  </div>
+  <div class="row"><button class="btn" data-cancel>Close</button></div>`);
+}
+
+/* ---------- actions ---------- */
+function saveLetter(seal){
+  const k=kid(); const ctx=letterCtx; if(!ctx) return;
+  const existing = ctx.id ? state.letters.find(x=>x.id===ctx.id) : null;
+  let base;
+  if(ctx.tpl){
+    const {rewrite, ...t} = ctx.tpl; base = t;
+  } else {
+    const kind=$("#lKind").value;
+    if(kind==="when"){
+      const when=$("#lWhen").value.trim(); if(!when){toast("Finish the sentence: open when...");return;}
+      const min=Math.max(1,+$("#lMin").value||1);
+      base={kind,when,openAge:min,title:`Open when ${when}`};
+    } else {
+      const age=Math.max(1,+$("#lAge").value||18);
+      base={kind,openAge:age,title:`For your ${ord(age)} birthday`};
+    }
+  }
+  const mode = ctx.mode;
+  const text = $("#lText").value.trim();
+  const file = $("#lFile").files[0];
+  let att = existing && existing.mode===mode ? existing.att||null : null;
+  if(mode!=="write" && file) att={kind:"file",name:file.name,mime:file.type,url:URL.createObjectURL(file)};
+  if(mode==="write") att=null;
+  if(seal && mode==="write" && !text){toast("Write the letter before sealing it");return;}
+  if(seal && mode!=="write" && !att){toast(mode==="voice"?"Choose a voice note first":"Choose a video first");return;}
+  const firstMonthlySeal = seal && base.monthly && base.month===MONTH && !(existing && existing.sealed);
+  const data={c:k.id,...base,mode,text:mode==="write"?text:"",att,sealed:seal,sealedOn:seal?TODAY_S:null};
+  if(existing) Object.assign(existing,data); else state.letters.push({id:nextId++,...data});
+  if(firstMonthlySeal && letterWeek(k)) state.streak++;
+  save();closeModal();route();
+  toast(seal?(firstMonthlySeal&&letterWeek(k)?`Sealed. That's ${state.streak} weeks in a row.`:"Sealed. It'll be waiting for them."):"Draft saved");
+}
+document.addEventListener("click",async e=>{
+  const t=e.target;
+  if(t.matches("[data-close]")||t.closest("[data-cancel]")){closeModal();return;}
+  if(t.closest("[data-add]")){openAdd();return;}
+  if(t.closest("[data-newletter]")){openLetter();return;}
+  if(t.closest("[data-monthly]")){openLetter({monthly:true});return;}
+  if(t.closest("[data-swap]")){
+    if(state.letters.some(l=>l.monthly&&l.month===MONTH&&l.kind==="when")){toast("This month's letter is already started, so the topic is set");return;}
+    openSwap();return;
+  }
+  const pk=t.closest("[data-picktopic]"); if(pk){state.topicSwap[MONTH]=pk.dataset.picktopic;save();closeModal();route();toast("Topic swapped");return;}
+  const el=t.closest("[data-editletter]"); if(el){openLetter({id:+el.dataset.editletter});return;}
+  const lm=t.closest("[data-lmode]"); if(lm&&letterCtx){
+    const m=lm.dataset.lmode; letterCtx.mode=m;
+    document.querySelectorAll("[data-lmode]").forEach(b=>b.classList.toggle("on",b===lm));
+    $("#lWriteWrap").classList.toggle("hidden",m!=="write"); $("#lFileWrap").classList.toggle("hidden",m==="write");
+    $("#lFile").accept = m==="video"?"video/*":"audio/*"; $("#lFile").value="";
+    $("#lFileLabel").textContent = m==="video"?"Choose a video of yourself":"Choose a voice note";
+    return;
+  }
+  if(t.closest("[data-interview]")){openInterview();return;}
+  if(t.closest("[data-book]")){openBook();return;}
+  const f=t.closest("[data-filter]"); if(f){state.filter=f.dataset.filter;route();return;}
+  const m=t.closest("[data-mode]"); if(m){state.answerMode=m.dataset.mode;route();return;}
+  if(t.closest("[data-answer]")){
+    const k=kid(); const q=weeklyPrompt(k);
+    let text="", att=null;
+    if(state.answerMode==="write"){ text=$("#ans").value.trim(); if(!text){toast("Write a few words first");return;} }
+    else { const file=$("#ansFile").files[0]; if(!file){toast("Choose a file first");return;} att={kind:"file",name:file.name,mime:file.type,url:URL.createObjectURL(file)}; text=state.answerMode==="voice"?"Voice note":"Video message"; }
+    state.entries.push({id:nextId++,c:k.id,type:state.answerMode==="write"?"moment":"voice",title:q,text,date:TODAY_S,att});
+    state.answeredThisWeek=true; state.streak++; save(); route(); toast("Saved. That's "+state.streak+" weeks in a row.");return;
+  }
+  if(t.closest("[data-saveentry]")){
+    const title=$("#mTitle").value.trim(); if(!title){toast("Give it a title");return;}
+    const file=$("#mFile").files[0];
+    state.entries.push({id:nextId++,c:state.active,type:$("#mType").value,title,text:$("#mText").value.trim(),date:$("#mDate").value||TODAY_S,att:file?{kind:"file",name:file.name,mime:file.type,url:URL.createObjectURL(file)}:null});
+    save();closeModal();route();toast("Kept safe in the vault");return;
+  }
+  const sl=t.closest("[data-saveletter]"); if(sl){ saveLetter(sl.dataset.seal==="1"); return; }
+  if(t.closest("[data-saveinterview]")){
+    const k=kid(); const age=ageAt(k.born,TODAY_S);
+    (state.interview[k.id]=state.interview[k.id]||{})[age]=INTERVIEW_Q.map((_,i)=>$("#iq"+i).value.trim());
+    save();closeModal();route();toast("Interview saved");return;
+  }
+  if(t.closest("[data-savesnap]")){
+    const k=kid(); const age=ageAt(k.born,TODAY_S); const s={};
+    document.querySelectorAll("[data-snap]").forEach(i=>s[i.dataset.snap]=i.value.trim());
+    (state.snapshot[k.id]=state.snapshot[k.id]||{})[age]=s; save(); toast("Snapshot saved");return;
+  }
+  if(t.closest("[data-savehandover]")){
+    const k=kid(); state.handover[k.id]={date:$("#hoDate").value,message:$("#hoMsg").value,trusted:$("#hoTrusted").value}; save(); route(); toast("Handover saved");return;
+  }
+  if(t.closest("[data-savechild]")){
+    const name=$("#cName").value.trim(), d=$("#cBorn").value, unborn=$("#cDue").checked;
+    if(!name||!d){toast("Add a name and a date");return;}
+    const id="k"+(nextId++); state.children.push({id,name,born:unborn?null:d,due:unborn?d:null}); state.active=id;
+    save();closeModal();route();toast(name+" added");return;
+  }
+  if(t.closest("[data-export]")){
+    const txt=state.children.map(k=>`${k.name}\n`+state.entries.filter(e=>e.c===k.id).map(e=>`- ${e.date} [${TYPES[e.type]}] ${e.title}: ${e.text}`).join("\n")+"\nLetters:\n"+state.letters.filter(l=>l.c===k.id).map(l=>`- ${l.title} (${l.sealed?"sealed":"draft"})`).join("\n")).join("\n\n");
+    try{await navigator.clipboard.writeText(txt);toast("Copied to your clipboard");}catch(err){toast("Copying isn't allowed here");}
+    return;
+  }
+  if(t.closest("[data-reset]")){ try{localStorage.removeItem(STORE);}catch(err){} location.reload(); }
+});
+document.addEventListener("change",e=>{
+  if(e.target.id==="previewWeek"){ state.preview=e.target.value; save(); route(); }
+});
+document.addEventListener("submit",e=>{
+  if(e.target.id==="inviteForm"){e.preventDefault(); state.family.push({name:$("#invName").value.trim(),role:$("#invRole").value,status:"Invite sent"}); save(); route(); toast("Invite ready (not sent in this example)");}
+});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal();});
+
+/* ---------- router ---------- */
+const VIEWS={"app-today":pageToday,"app-vault":pageVault,"app-letters":pageLetters,"app-yearly":pageYearly,"app-family":pageFamily,"app-handover":pageHandover,"app-privacy":pagePrivacy};
+function route(){
+  const h=location.hash.slice(1);
+  if(VIEWS[h]){
+    $("#landing").classList.add("hidden"); $("#app").classList.remove("hidden");
+    renderShell(h);
+    const weekPick = h==="app-today" ? `<label style="display:flex;gap:6px;align-items:center;margin:0;font-size:.8rem">Show me <select id="previewWeek"><option value="auto" ${state.preview==="auto"?"selected":""}>this week</option><option value="question" ${state.preview==="question"?"selected":""}>a question week</option><option value="letter" ${state.preview==="letter"?"selected":""}>a letter week</option></select></label>` : "";
+    $("#main").innerHTML=`<div class="draftbar"><span>An example with made-up data. Anything you add stays in this browser only.</span>${weekPick}<a href="#home">Back to the website</a></div>`+VIEWS[h]();
+  } else {
+    $("#app").classList.add("hidden"); $("#landing").classList.remove("hidden");
+    if(h && h!=="home"){ const el=document.getElementById(h); if(el) el.scrollIntoView(); } else if(h==="home") window.scrollTo(0,0);
+  }
+}
+window.addEventListener("hashchange",()=>{const isApp=!!VIEWS[location.hash.slice(1)]; route(); if(isApp) window.scrollTo(0,0); });
+load(); route();
+})();
+</script>
+</body>
+</html>
